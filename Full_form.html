@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Input Types Example</title>
+</head>
+<body>
+  <h1>All Input Types in HTML Form</h1>
+
+  <form>
+    <!-- 1. Text Input -->
+    <label>Text (Name):</label>
+    <input type="text" placeholder="Enter your name"><br><br> <!-- Simple text -->
+
+    <!-- 2. Email Input -->
+    <label>Email:</label>
+    <input type="email" placeholder="example@mail.com"><br><br> <!-- Valid email required -->
+
+    <!-- 3. Password Input -->
+    <label>Password:</label>
+    <input type="password" placeholder="Enter password"><br><br> <!-- Dots show instead of letters -->
+
+    <!-- 4. Number Input -->
+    <label>Age:</label>
+    <input type="number" min="1" max="100"><br><br> <!-- Only numbers allowed -->
+
+    <!-- 5. Checkbox -->
+    <label>Choose Hobbies:</label><br>
+    <input type="checkbox"> Reading<br>
+    <input type="checkbox"> Writing<br><br> <!-- Multiple select -->
+
+    <!-- 6. Radio Buttons -->
+    <label>Gender:</label><br>
+    <input type="radio" name="gender"> Male
+    <input type="radio" name="gender"> Female<br><br> <!-- Only one can be selected -->
+
+    <!-- 7. Date -->
+    <label>Date of Birth:</label>
+    <input type="date"><br><br>
+
+    <!-- 8. Color -->
+    <label>Pick a color:</label>
+    <input type="color"><br><br>
+
+    <!-- 9. File Upload -->
+    <label>Upload file:</label>
+    <input type="file"><br><br>
+
+    <!-- 10. Range Slider -->
+    <label>Volume:</label>
+    <input type="range" min="0" max="100"><br><br>
+
+    <!-- 11. Search -->
+    <label>Search:</label>
+    <input type="search" placeholder="Search here"><br><br>
+
+    <!-- 12. Telephone -->
+    <label>Phone:</label>
+    <input type="tel" placeholder="123-456-7890"><br><br>
+
+    <!-- 13. URL -->
+    <label>Website:</label>
+    <input type="url" placeholder="https://example.com"><br><br>
+
+    <!-- 14. Time -->
+    <label>Select Time:</label>
+    <input type="time"><br><br>
+
+    <!-- 15. Week -->
+    <label>Choose Week:</label>
+    <input type="week"><br><br>
+
+    <!-- 16. Month -->
+    <label>Choose Month:</label>
+    <input type="month"><br><br>
+
+    <!-- 17. Hidden Input -->
+    <input type="hidden" value="hiddenValue"><!-- Backend ke liye, user ko dikhai nahi deta -->
+
+    <!-- 18. Image Input -->
+    <label>Image Button:</label><br>
+    <input type="image" src="https://via.placeholder.com/100" alt="Submit with image"><br><br>
+
+    <!-- 19. Datetime-local -->
+    <label>Select Date & Time:</label>
+    <input type="datetime-local"><br><br>
+
+    <!-- 20. Textarea -->
+    <label>Message:</label><br>
+    <textarea rows="4" cols="30" placeholder="Write your message here..."></textarea><br><br>
+
+    <!-- 21. Select Dropdown -->
+    <label>Select Country:</label>
+    <select>
+      <optgroup label="Asia">
+        <option>India</option>
+        <option>Japan</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option>France</option>
+        <option>Germany</option>
+      </optgroup>
+    </select><br><br>
+
+    <!-- 22. Datalist -->
+    <label>Choose Browser:</label>
+    <input list="browsers">
+    <datalist id="browsers">
+      <option value="Chrome">
+      <option value="Firefox">
+      <option value="Edge">
+    </datalist><br><br>
+
+    <!-- 23. Output -->
+    <label>Result:</label>
+    <output name="result">0</output><br><br>
+
+    <!-- 24. Progress -->
+    <label>Progress:</label>
+    <progress value="60" max="100"></progress><br><br>
+
+    <!-- 25. Meter -->
+    <label>Battery Level:</label>
+    <meter value="0.8">80%</meter><br><br>
+
+    <!-- Submit & Reset -->
+    <button type="submit">Submit</button>
+    <input type="reset" value="Reset"><br><br>
+  </form>
+
+</body>
+</html>
