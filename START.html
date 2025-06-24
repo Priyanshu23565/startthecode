@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLearn - Programming Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --dark: #2c2c54;
+            --light: #f7f7f7;
+            --success: #1dd1a1;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            animation: glow 2s infinite alternate;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #a0a0d0;
+            margin-bottom: 30px;
+        }
+
+        /* Course Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            transform: translateY(0);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .course-card:nth-child(2) { animation-delay: 1s; }
+        .course-card:nth-child(3) { animation-delay: 2s; }
+        .course-card:nth-child(4) { animation-delay: 3s; }
+        .course-card:nth-child(5) { animation-delay: 1.5s; }
+        .course-card:nth-child(6) { animation-delay: 2.5s; }
+
+        .course-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(78, 84, 200, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .course-icon {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .course-card p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Course Detail Page */
+        .course-detail {
+            display: none;
+            padding: 40px 0;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .course-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .course-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .course-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #d0d0e7;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 25px rgba(78, 84, 200, 0.3);
+        }
+
+        .resource-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .resource-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .resource-card p {
+            color: #bbb;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0a0d0;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px rgba(78, 84, 200, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(78, 84, 200, 0.8), 0 0 30px rgba(143, 148, 251, 0.6); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .course-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Course Listing Page -->
+        <div id="main-page">
+            <header>
+                <div class="logo">TechLearn</div>
+                <p class="tagline">Master in-demand tech skills with our comprehensive courses</p>
+            </header>
+
+            <div class="courses-grid">
+                <!-- Course Cards -->
+                <div class="course-card" data-course="cpp">
+                    <div class="course-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>C & C++</h3>
+                        <p>Master the fundamentals of programming with C and C++. Learn memory management, OOP concepts, and build efficient applications.</p>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="java">
+                    <div class="course-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Java</h3>
+                        <p>Learn Java programming for enterprise applications. Understand OOP principles, design patterns, and build robust applications.</p>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="python">
+                    <div class="course-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Python</h3>
+                        <p>From basics to advanced topics. Learn data science, machine learning, web development, and automation with Python.</p>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="excel">
+                    <div class="course-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Advanced Excel</h3>
+                        <p>Master advanced Excel functions, pivot tables, macros, data analysis, and visualization techniques for business intelligence.</p>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="sql">
+                    <div class="course-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>SQL</h3>
+                        <p>Learn to manage and query relational databases. Master complex queries, database design, and optimization techniques.</p>
+                    </div>
+                </div>
+
+                <div class="course-card" data-course="web">
+                    <div class="course-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Web Development</h3>
+                        <p>Full-stack web development course covering HTML, CSS, JavaScript, React, Node.js, and modern development practices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Detail Pages -->
+        <div id="course-detail" class="course-detail">
+            <button class="back-btn" id="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Courses
+            </button>
+
+            <div class="course-header">
+                <h2 id="course-title">Course Title</h2>
+            </div>
+
+            <div class="course-description" id="course-description">
+                Course description will appear here...
+            </div>
+
+            <div class="resources">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Notes</h3>
+                    <p>Download comprehensive notes and reference materials for this course.</p>
+                    <a href="#" class="btn" id="notes-btn">Download Notes</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Tasks</h3>
+                    <p>Practical assignments and projects to reinforce your learning.</p>
+                    <a href="#" class="btn" id="tasks-btn">View Tasks</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Programs</h3>
+                    <p>Code examples and sample programs for hands-on practice.</p>
+                    <a href="#" class="btn" id="programs-btn">View Programs</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Cheat Sheet</h3>
+                    <p>Quick reference guides and cheat sheets for important concepts.</p>
+                    <a href="#" class="btn" id="cheatsheet-btn">Download Cheat Sheet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 TechLearn. All rights reserved. | Learning Platform for Developers</p>
+    </footer>
+
+    <script>
+        // Course data
+        const courses = {
+            cpp: {
+                title: "C & C++ Programming",
+                description: "Master the fundamentals of programming with C and C++. This comprehensive course covers everything from basic syntax to advanced concepts like memory management, object-oriented programming, and template metaprogramming. You'll learn to build efficient applications, understand low-level computing concepts, and develop problem-solving skills applicable to any programming language.",
+                notes: "https://github.com/yourusername/cpp-notes",
+                tasks: "https://github.com/yourusername/cpp-tasks",
+                programs: "https://github.com/yourusername/cpp-programs",
+                cheatsheet: "https://github.com/yourusername/cpp-cheatsheet"
+            },
+            java: {
+                title: "Java Programming",
+                description: "Learn Java programming for enterprise-level applications. This course covers object-oriented programming principles, design patterns, multithreading, and Java frameworks. You'll build robust applications, understand JVM internals, and learn best practices for software development. By the end, you'll be able to develop scalable applications using Java ecosystem tools.",
+                notes: "https://github.com/yourusername/java-notes",
+                tasks: "https://github.com/yourusername/java-tasks",
+                programs: "https://github.com/yourusername/java-programs",
+                cheatsheet: "https://github.com/yourusername/java-cheatsheet"
+            },
+            python: {
+                title: "Python Development",
+                description: "From basics to advanced topics, this Python course covers everything you need to become proficient. Learn data science with Pandas and NumPy, machine learning with Scikit-learn, web development with Django and Flask, and automation scripting. The course includes real-world projects and emphasizes Pythonic coding practices and efficient problem-solving.",
+                notes: "https://github.com/yourusername/python-notes",
+                tasks: "https://github.com/yourusername/python-tasks",
+                programs: "https://github.com/yourusername/python-programs",
+                cheatsheet: "https://github.com/yourusername/python-cheatsheet"
+            },
+            excel: {
+                title: "Advanced Excel",
+                description: "Master Microsoft Excel for business intelligence and data analysis. This course covers advanced functions, pivot tables, macros, Power Query, and data visualization techniques. You'll learn to automate repetitive tasks, analyze large datasets, create interactive dashboards, and use Excel for financial modeling and business forecasting.",
+                notes: "https://github.com/yourusername/excel-notes",
+                tasks: "https://github.com/yourusername/excel-tasks",
+                programs: "https://github.com/yourusername/excel-macros",
+                cheatsheet: "https://github.com/yourusername/excel-cheatsheet"
+            },
+            sql: {
+                title: "SQL & Database Management",
+                description: "Learn to manage and query relational databases efficiently. This course covers database design, complex SQL queries, optimization techniques, and administration. You'll work with MySQL, PostgreSQL, and SQL Server, learning to write efficient queries, design normalized databases, implement stored procedures, and ensure data integrity.",
+                notes: "https://github.com/yourusername/sql-notes",
+                tasks: "https://github.com/yourusername/sql-tasks",
+                programs: "https://github.com/yourusername/sql-queries",
+                cheatsheet: "https://github.com/yourusername/sql-cheatsheet"
+            },
+            web: {
+                title: "Web Development",
+                description: "Become a full-stack web developer with this comprehensive course. Learn HTML5, CSS3, JavaScript (ES6+), React, Node.js, Express, and MongoDB. The curriculum includes responsive design, RESTful APIs, authentication, deployment, and modern development workflows. Build portfolio-worthy projects and learn industry best practices.",
+                notes: "https://github.com/yourusername/webdev-notes",
+                tasks: "https://github.com/yourusername/webdev-tasks",
+                programs: "https://github.com/yourusername/webdev-projects",
+                cheatsheet: "https://github.com/yourusername/webdev-cheatsheet"
+            }
+        };
+
+        // DOM Elements
+        const mainPage = document.getElementById('main-page');
+        const courseDetail = document.getElementById('course-detail');
+        const backBtn = document.getElementById('back-btn');
+        const courseTitle = document.getElementById('course-title');
+        const courseDescription = document.getElementById('course-description');
+        const notesBtn = document.getElementById('notes-btn');
+        const tasksBtn = document.getElementById('tasks-btn');
+        const programsBtn = document.getElementById('programs-btn');
+        const cheatsheetBtn = document.getElementById('cheatsheet-btn');
+        const courseCards = document.querySelectorAll('.course-card');
+
+        // Event Listeners
+        courseCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const courseId = card.getAttribute('data-course');
+                showCourseDetail(courseId);
+            });
+        });
+
+        backBtn.addEventListener('click', () => {
+            courseDetail.style.display = 'none';
+            mainPage.style.display = 'block';
+        });
+
+        // Show Course Detail Page
+        function showCourseDetail(courseId) {
+            const course = courses[courseId];
+            
+            if (course) {
+                courseTitle.textContent = course.title;
+                courseDescription.textContent = course.description;
+                
+                // Update resource links
+                notesBtn.href = course.notes;
+                tasksBtn.href = course.tasks;
+                programsBtn.href = course.programs;
+                cheatsheetBtn.href = course.cheatsheet;
+                
+                // Show detail page
+                mainPage.style.display = 'none';
+                courseDetail.style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Initial animations
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelector('.logo').style.animation = 'glow 2s infinite alternate';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
